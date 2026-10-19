@@ -1,23 +1,25 @@
-# path: función para definir una ruta individual
+# path: función para declarar una ruta URL y a qué vista apunta
 from django.urls import path
-# views: el archivo que acabás de escribir, en la misma carpeta
+# views: el módulo con todas las funciones-vista de esta app
 from . import views
 
-# urlpatterns: lista de rutas que esta app entiende
+# urlpatterns: la lista de rutas que Django revisa, en orden, para cada URL
 urlpatterns = [
-    # '': la URL vacía (la raíz de esta app) · views.inicio: la función que la atiende
-    # name='inicio': un alias interno para referirse a esta ruta sin escribir la URL a mano
+    # '': la página de inicio de la Semana 3; no la borres
     path('', views.inicio, name='inicio'),
-    # nueva ruta 'servicios/' → función views.servicios → alias 'servicios'
-    path('catalogo/', views.servicios, name='servicios'),
-
-
-    ### SE AGRAGRON ESTOS
+    # /servicios/: listado (Semana 3), ahora filtrado por usuario
     path('servicios/', views.servicios, name='servicios'),
-    # /servicios/nuevo/: formulario en blanco para crear un registro
+    # /servicios/nuevo/: crear (Semana 5)
     path('servicios/nuevo/', views.crear_servicio, name='crear_servicio'),
-    # /servicios/<int:pk>/editar/: <int:pk> captura el id de la URL y lo pasa como argumento a la vista
+    # /servicios/<id>/editar/: editar (Semana 5)
     path('servicios/<int:pk>/editar/', views.editar_servicio, name='editar_servicio'),
-    # /servicios/<int:pk>/eliminar/: mismo patrón, para la pantalla de confirmación de borrado
+    # /servicios/<id>/eliminar/: eliminar con confirmación (Semana 5)
     path('servicios/<int:pk>/eliminar/', views.eliminar_servicio, name='eliminar_servicio'),
+    # /registro/: NUEVA, pantalla de alta de cuenta
+    path('registro/', views.registro, name='registro'),
+    # /login/: NUEVA, pantalla de inicio de sesión propia (reemplaza al login prestado de /admin)
+    path('login/', views.iniciar_sesion, name='login'),
+    # /logout/: NUEVA, cierra la sesión activa
+    path('logout/', views.cerrar_sesion, name='logout'),
+# cierra la lista urlpatterns
 ]
